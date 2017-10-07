@@ -1,8 +1,8 @@
-#Introduction to DC (work in progress)
+# Introduction to DC (work in progress)
 
 DC is based on Yap-prolog. This means that model and inference are written in Prolog.
 
-###Initialization
+### Initialization
 The first part of the program regards library inclusion and initialization. For example:
 ```
 :- use_module('../distributionalclause.pl'). % load distributional clauses library
@@ -12,12 +12,12 @@ The first part of the program regards library inclusion and initialization. For 
 :- set_options(default),set_query_propagation(true). % options
 :- initialization(init). % initialize DC
 ```
-###Options
+### Options
 Set default options (mandatory): ```:- set_options(default).```
 
 Set default options + query propagation ```:- set_options(default),set_query_propagation(true).```
 
-###Model
+### Model
 The model is described using distributional clauses. The syntax is explained in the next section.
 
 Example:
@@ -26,7 +26,7 @@ Example:
 coin ~ finite([0.2:true,0.8:false]). % syntax name_variable ~ finite([prob:value,prob:value,...])
 ```
 
-###Inference
+### Inference
 Inference is called with the predicate ```query```
 
 Syntax: ``` query(positive_evidence_List,negative_evidence_List,query_to_consider,num_samples,Probability). ```
@@ -59,7 +59,7 @@ P = 0.2
 ```
 
 
-#DC Syntax
+# DC Syntax
 
 
 **Built-in Yap-Prolog operators**
@@ -86,7 +86,7 @@ The following operators/predicates can be used in DC clauses:
   pos(A) :- A>0. % prolog clause
   ```
 
-##Deterministic clauses
+## Deterministic clauses
 
 Syntax: `head := body.`
 
@@ -101,7 +101,7 @@ inside(1,2) := true. % inside(1,2) is a true fact. The body has to be specified 
 ```
 
 
-##Distributional clauses
+## Distributional clauses
 
 Syntax: `head ~ distribution := body.`
 
@@ -117,7 +117,7 @@ coin ~ finite([0.2:true,0.8:false]). % the body is implicitly true.
 coin2 ~ finite([0.4:true,0.6:false]) := coin ~= true. % if coin is true then coin2 is defined with a given distribution.
 ```
 
-##Operators
+## Operators
 
 
 **Equality operator for random variables**
@@ -151,7 +151,7 @@ not_tall(X) := person(X), \+ tall(X). % not_tall(X) is true if X is a not tall p
 ```
 The definition of 'tall(X)' is deterministic, but since it depends on the random variable 'height(X)', 'tall(X)' is implicitely a random variable. The atom `tall(X)` or its negation `\+ tall(X)` can be used as literals in the body of another clause.
 
-###Supported distributions
+### Supported distributions
 
 * Bernoulli/categorical
 
